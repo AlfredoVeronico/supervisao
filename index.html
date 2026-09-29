@@ -1,31 +1,4 @@
-﻿<?php
-
-
-include_once("conexao.php");
-
-$id=$_SESSION['id'];
-
-$consulta=pg_query($con, ("SELECT * FROM accounts WHERE id='$id'"));
-$Usua=pg_fetch_array($consulta);
-$username=$Usua[1];
-$delegacao=$Usua[4];
-$rep_serv=$Usua[5];
-$supervisor=$Usua[6];
-$tecnico1=$Usua[7];
-$tecnico2=$Usua[8];
-$tecnico3=$Usua[9];
-$tecnico4=$Usua[10];
-$tecnico5=$Usua[11];
-$tecnico6=$Usua[12];
-$tecnico7=$Usua[13];
-$tecnico8=$Usua[14];
-
-?>
-
-
-
-
-
+﻿
 <!DOCTYPE HTML>
 
 <html>
@@ -55,7 +28,7 @@ $tecnico8=$Usua[14];
 
 				<!-- Logo -->
 				<a href="index.html" class="logo">
-					<span class="symbol"><img src="images/logo.png" alt="" /></span><span class="title"></span>
+					<span class="symbol"><img src="logo.png" alt="" /></span><span class="title"></span>
 				</a>
 			
 			    
