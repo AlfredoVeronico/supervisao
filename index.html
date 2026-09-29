@@ -1,0 +1,1587 @@
+﻿<?php
+
+
+include_once("conexao.php");
+
+$id=$_SESSION['id'];
+
+$consulta=pg_query($con, ("SELECT * FROM accounts WHERE id='$id'"));
+$Usua=pg_fetch_array($consulta);
+$username=$Usua[1];
+$delegacao=$Usua[4];
+$rep_serv=$Usua[5];
+$supervisor=$Usua[6];
+$tecnico1=$Usua[7];
+$tecnico2=$Usua[8];
+$tecnico3=$Usua[9];
+$tecnico4=$Usua[10];
+$tecnico5=$Usua[11];
+$tecnico6=$Usua[12];
+$tecnico7=$Usua[13];
+$tecnico8=$Usua[14];
+
+?>
+
+
+
+
+
+<!DOCTYPE HTML>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+ 
+	<link rel="shortcut icon" href="images/favicon.ico" type="images/x-icon">
+	<title>Supervisão Técnica</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+
+</head>
+<section id="inicio">
+
+</section>
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+
+		<header id="header">
+			<div class="inner">
+
+				<!-- Logo -->
+				<a href="index.html" class="logo">
+					<span class="symbol"><img src="images/logo.png" alt="" /></span><span class="title"></span>
+				</a>
+			
+			    
+
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<li> <a href="registo.php"><i class="fas fa-key"></i>&nbsp; &nbsp;Alterar palavra-passe</a></li>			   	
+				<li><a href="#identificacao">Equipamento</a></li>
+				<li><a href="#maquina">Casa das Máquinas</a></li>
+				<li><a href="#arcada">Arcada</a></li>
+				<li><a href="#caixa">Caixa e Poço</a></li>
+				<li><a href="#cabina">Cabina</a></li>
+				<li><a href="#patamares">Patamares</a></li>
+				<li><a href="#avaliacao"><i class="fas fa-download"></i>&nbsp; &nbsp; Relatório</a></li>
+				<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp; &nbsp;Sair</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+		<h1>Supervisão Técnica de Elevadores </h1>
+
+			<div class="inner">
+
+
+				<span class="image main"><img src="images/fig1.jpg" alt="" /></span>
+
+				<section id="identificacao">
+					</br>
+					<h2>EQUIPAMENTO</h2>
+					<hr />
+					
+						
+					
+					<form id="form" method="post" action="send_email.php">
+						  
+						<div class="fields">
+						
+						 <div class="field">
+							
+								<select name="tipoequipamento" id="tipoequipameno" onchange="javascript:location.href=this.value">
+									<option value="home.php" selected> Elevadores eléctrico com casa das máquinas </option>
+									<option value="home_hp.php"> Elevadores Hidraúlicos </option>
+									<option value="home_scm.php">Elevadores eléctrico sem casa das máquinas </option>
+									<option value="home_escadas.php"> Escadas e Tapetes</option>
+									<option value="home_sobe_escadas.php"> Plataformas Sobe Escadas</option>
+									<option value="home_plataforma.php"> Plataformas Elevatórias</option>
+									<option value="home_monta_papel_electrico.php"> Monta Papel Eléctrico</option>
+									<option value="home_monta_papel_hidraulico.php"> Monta Papel Hidráulico</option>
+                            	</select>
+								
+							</div>
+
+						
+								<div class="field half">
+							
+									<input type="text" name="equipamento" id="equipamento" placeholder="Insira nº obra " >
+								
+								</div> 
+								
+								<div class="field half">
+							
+								  <input type="text" name="morada" id="morada"  placeholder="Localização ">
+							
+							    </div>							
+									
+								<div class="field half">
+							
+									<input type="text" name="delegacao" id="delegacao" value="<?=$delegacao?>" >
+								
+								</div> 
+								
+								<div class="field half">
+							
+								  <input type="text" name="rep_serv" id="rep_serv" value="<?=$rep_serv?>" >
+							
+							    </div>
+						
+						        <div class="field half">
+                                 
+                                    <input type="text" name="supervisor" id="supervisor" value="<?=$supervisor?>" >
+							
+                                </div> 
+
+						        <div class="field half">
+								    <select name="tecnico" id="tecnico" onchange="mudarSelect()">
+									<option value="<?=$tecnico1?>"> <?=$tecnico1?> </option>
+									<option value="<?=$tecnico2?>"> <?=$tecnico2?> </option>
+                                      					<option value="<?=$tecnico3?>"> <?=$tecnico3?> </option>
+									<option value="<?=$tecnico4?>"> <?=$tecnico4?> </option>
+									<option value="<?=$tecnico5?>"> <?=$tecnico5?> </option>
+ 									<?php if(isset($tecnico6)){ echo "<option value='$tecnico6'>$tecnico6</option>"; }?>
+									<?php if(isset($tecnico7)){ echo "<option value='$tecnico7'>$tecnico7</option>"; }?>
+									<?php if(isset($tecnico8)){ echo "<option value='$tecnico8'>$tecnico8</option>"; }?>
+
+									
+								    </select>
+
+							    </div>
+								
+						    </div>
+						
+						
+				
+				</section>
+
+				<section id="maquina">
+					</br>
+					<div id="100"> <h2>Casa das Máquinas</h2></div>
+
+				   	<hr />
+                   
+                    <div id="sp_maquina">
+					<table align="center">
+
+						<tr>
+							<td> <div id="101">1.1 Acesso casa das máquinas</div> </td>
+						
+							<td>
+
+								<input type="radio" id="1.1-OK" value="Conforme" name="1.1" >
+								<label for="1.1-OK">Conforme</label>
+								<input type="radio" id="1.1-NOK" value="Não Conforme" name="1.1">
+								<label for="1.1-NOK">Não Conforme</label>
+								<input type="radio" id="1.1-NA" value="Não Aplicável" name="1.1" checked="checked">
+								<label for="1.1-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+						<td><div id="102">1.2 Placas  com indicação da casa das máquinas  e tipo de contrato manutenção</div></td>
+							<td>
+								<input type="radio" id="1.2-OK" name="1.2">
+								<label for="1.2-OK">Conforme</label>
+								<input type="radio" id="1.2-NOK" name="1.2">
+								<label for="1.2-NOK">Não Conforme</label>
+								<input type="radio" id="1.2-NA" name="1.2" checked="checked">
+								<label for="1.2-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+					<td><div id="103">1.3 Paredes, pavimentos, teto, em bom estado de conservação e sem humidades</div></td>
+							<td>
+								<input type="radio" id="1.3-OK" name="1.3">
+								<label for="1.3-OK">Conforme</label>
+								<input type="radio" id="1.3-NOK" name="1.3">
+								<label for="1.3-NOK">Não Conforme</label>
+								<input type="radio" id="1.3-NA" name="1.3" checked="checked">
+								<label for="1.3-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+						<td><div id="104">1.4 Nível de iluminação no pavimento adequado</div></td>
+							<td>
+								<input type="radio" id="1.4-OK" name="1.4">
+								<label for="1.4-OK">Conforme</label>
+								<input type="radio" id="1.4-NOK" name="1.4">
+								<label for="1.4-NOK">Não Conforme</label>
+								<input type="radio" id="1.4-NA" name="1.4" checked="checked">
+								<label for="1.4-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="105">1.5 Iluminação de emergência operacional</div></td>
+							<td>
+								<input type="radio" id="1.5-OK" name="1.5">
+								<label for="1.5-OK">Conforme</label>
+								<input type="radio" id="1.5-NOK" name="1.5">
+								<label for="1.5-NOK">Não Conforme</label>
+								<input type="radio" id="1.5-NA" name="1.5" checked="checked">
+								<label for="1.5-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="106">1.6 Existência de gancho com indicação da carga máxima admissível</div></td>
+							<td>
+								<input type="radio" id="1.6-OK" name="1.6">
+								<label for="1.6-OK">Conforme</label>
+								<input type="radio" id="1.6-NOK" name="1.6">
+								<label for="1.6-NOK">Não Conforme</label>
+								<input type="radio" id="1.6-NA" name="1.6" checked="checked">
+								<label for="1.6-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="107">1.7 Livro de registo de conservação corretamente preenchido</div></td>
+							<td>
+								<input type="radio" id="1.7-OK" name="1.7">
+								<label for="1.7-OK">Conforme</label>
+								<input type="radio" id="1.7-NOK" name="1.7">
+								<label for="1.7-NOK">Não Conforme</label>
+								<input type="radio" id="1.7-NA" name="1.7" checked="checked">
+								<label for="1.7-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="108">1.8 Plano de manutenção corretamente preenchido</div></td>
+							<td>
+								<input type="radio" id="1.8-OK" name="1.8">
+								<label for="1.8-OK">Conforme</label>
+								<input type="radio" id="1.8-NOK" name="1.8">
+								<label for="1.8-NOK">Não Conforme</label>
+								<input type="radio" id="1.8-NA" name="1.8" checked="checked">
+								<label for="1.8-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="109">1.9 Chave de desencravamento de portas e respectivo aviso</div></td>
+							<td>
+								<input type="radio" id="1.9-OK" name="1.9">
+								<label for="1.9-OK">Conforme</label>
+								<input type="radio" id="1.9-NOK" name="1.9">
+								<label for="1.9-NOK">Não Conforme</label>
+								<input type="radio" id="1.9-NA" name="1.9" checked="checked">
+								<label for="1.9-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="110">1.10 Instruções para movimentação de emergência adequadas</div></td>
+							<td>
+								<input type="radio" id="1.10-OK" name="1.10">
+								<label for="1.10-OK">Conforme</label>
+								<input type="radio" id="1.10-NOK" name="1.10">
+								<label for="1.10-NOK">Não Conforme</label>
+								<input type="radio" id="1.10-NA" name="1.10" checked="checked">
+								<label for="1.10-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="111">1.11 Dispositivo diferencial do quadro elétrico</div></td>
+							<td>
+								<input type="radio" id="1.11-OK" name="1.11">
+								<label for="1.11-OK">Conforme</label>
+								<input type="radio" id="1.11-NOK" name="1.11">
+								<label for="1.11-NOK">Não Conforme</label>
+								<input type="radio" id="1.11-NA" name="1.11" checked="checked">
+								<label for="1.11-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="112">1.12 Protecções do quadro elétrico identificadas </div></td>
+							<td>
+								<input type="radio" id="1.12-OK" name="1.12">
+								<label for="1.12-OK">Conforme</label>
+								<input type="radio" id="1.12-NOK" name="1.12">
+								<label for="1.12-NOK">Não Conforme</label>
+								<input type="radio" id="1.12-NA" name="1.12" checked="checked">
+								<label for="1.12-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="113">1.13 Continuidade eléctrica (armário de comando, quadro eléctrico, máquina, etc.) </div></td>
+							<td>
+								<input type="radio" id="1.13-OK" name="1.13">
+								<label for="1.13-OK">Conforme</label>
+								<input type="radio" id="1.13-NOK" name="1.13">
+								<label for="1.13-NOK">Não Conforme</label>
+								<input type="radio" id="1.13-NA" name="1.13" checked="checked">
+								<label for="1.13-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="114">1.14 Sequenciador de Fases</div> </td>
+							<td>
+								<input type="radio" id="1.14-OK" name="1.14">
+								<label for="1.14-OK">Conforme</label>
+								<input type="radio" id="1.14-NOK" name="1.14">
+								<label for="1.14-NOK">Não Conforme</label>
+								<input type="radio" id="1.14-NA" name="1.14" checked="checked">
+								<label for="1.14-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="115">1.15 Estado dos relés e contactores do comando </div> </td>
+							<td>
+								<input type="radio" id="1.15-OK" name="1.15">
+								<label for="1.15-OK">Conforme</label>
+								<input type="radio" id="1.15-NOK" name="1.15">
+								<label for="1.15-NOK">Não Conforme</label>
+								<input type="radio" id="1.15-NA" name="1.15" checked="checked">
+								<label for="1.15-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="116">1.16 Artigo 75º </div> </td>
+							<td>
+								<input type="radio" id="1.16-OK" name="1.16">
+								<label for="1.16-OK">Conforme</label>
+								<input type="radio" id="1.16-NOK" name="1.16">
+								<label for="1.16-NOK">Não Conforme</label>
+								<input type="radio" id="1.16-NA" name="1.16" checked="checked">
+								<label for="1.16-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="117">1.17 Fim de curso superior </div> </td>
+							<td>
+								<input type="radio" id="1.17-OK" name="1.17">
+								<label for="1.17-OK">Conforme</label>
+								<input type="radio" id="1.17-NOK" name="1.17">
+								<label for="1.17-NOK">Não Conforme</label>
+								<input type="radio" id="1.17-NA" name="1.17" checked="checked">
+								<label for="1.17-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="118">1.18 Fim de curso inferior</div></td>
+							<td>
+								<input type="radio" id="1.18-OK" name="1.18">
+								<label for="1.18-OK">Conforme</label>
+								<input type="radio" id="1.18-NOK" name="1.18">
+								<label for="1.18-NOK">Não Conforme</label>
+								<input type="radio" id="1.18-NA" name="1.18" checked="checked">
+								<label for="1.18-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="119">1.19 Ensaio do pára-quedas</div></td>
+							<td>
+								<input type="radio" id="1.19-OK" name="1.19">
+								<label for="1.19-OK">Conforme</label>
+								<input type="radio" id="1.19-NOK" name="1.19" >
+								<label for="1.19-NOK">Não Conforme</label>
+								<input type="radio" id="1.19-NA" name="1.19" checked="checked">
+								<label for="1.19-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="120">1.20 Limitador de velocidade (calibre, selo, etc.)</div></td>
+							<td>
+								<input type="radio" id="1.20-OK" name="1.20">
+								<label for="1.20-OK">Conforme</label>
+								<input type="radio" id="1.20-NOK" name="1.20">
+								<label for="1.20-NOK">Não Conforme</label>
+								<input type="radio" id="1.20-NA" name="1.20" checked="checked">
+								<label for="1.20-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="121">1.21 Verificação da velocidade de actuação do limitador de velocidade</div></td>
+							<td>
+								<input type="radio" id="1.21-OK" name="1.21">
+								<label for="1.21-OK">Conforme</label>
+								<input type="radio" id="1.21-NOK" name="1.21">
+								<label for="1.21-NOK">Não Conforme</label>
+								<input type="radio" id="1.21-NA" name="1.21" checked="checked">
+								<label for="1.21-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="122">1.22 Nível do óleo do carter da máquina</div></td>
+							<td>
+								<input type="radio" id="1.22-OK" name="1.22">
+								<label for="1.22-OK">Conforme</label>
+								<input type="radio" id="1.22-NOK" name="1.22">
+								<label for="1.22-NOK">Não Conforme</label>
+								<input type="radio" id="1.22-NA" name="1.22" checked="checked">
+								<label for="1.22-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="123">1.23 Vedação da máquina</div></td>
+							<td>
+								<input type="radio" id="1.23-OK" name="1.23">
+								<label for="1.23-OK">Conforme</label>
+								<input type="radio" id="1.23-NOK" name="1.23">
+								<label for="1.23-NOK">Não Conforme</label>
+								<input type="radio" id="1.23-NA" name="1.23" checked="checked">
+								<label for="1.23-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="124">1.24 Estado dos rolamentos e bronzes da máquina</div></td>
+							<td>
+								<input type="radio" id="1.24-OK" name="1.24">
+								<label for="1.24-OK">Conforme</label>
+								<input type="radio" id="1.24-NOK" name="1.24">
+								<label for="1.24-NOK">Não Conforme</label>
+								<input type="radio" id="1.24-NA" name="1.24" checked="checked">
+								<label for="1.24-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="125">1.25 Nivelamento da máquina</div></td>
+							<td>
+								<input type="radio" id="1.25-OK" name="1.25">
+								<label for="1.25-OK">Conforme</label>
+								<input type="radio" id="1.25-NOK" name="1.25">
+								<label for="1.25-NOK">Não Conforme</label>
+								<input type="radio" id="1.25-NA" name="1.25" checked="checked">
+								<label for="1.25-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="126">1.26 Estado das cintas do travão da máquina</div></td>
+							<td>
+								<input type="radio" id="1.26-OK" name="1.26">
+								<label for="1.26-OK">Conforme</label>
+								<input type="radio" id="1.26-NOK" name="1.26">
+								<label for="1.26-NOK">Não Conforme</label>
+								<input type="radio" id="1.26-NA" name="1.26" checked="checked">
+								<label for="1.26-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="127">1.27 Barra contra saltamento dos cabos na roda de tracção</div> </td>
+							<td>
+								<input type="radio" id="1.27-OK" name="1.27">
+								<label for="1.27-OK">Conforme</label>
+								<input type="radio" id="1.27-NOK" name="1.27">
+								<label for="1.27-NOK">Não Conforme</label>
+								<input type="radio" id="1.27-NA" name="1.27" checked="checked">
+								<label for="1.27-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="128">1.28 Blindagem da máquina</div></td>
+							<td>
+								<input type="radio" id="1.28-OK" name="1.28">
+								<label for="1.28-OK">Conforme</label>
+								<input type="radio" id="1.28-NOK" name="1.28">
+								<label for="1.28-NOK">Não Conforme</label>
+								<input type="radio" id="1.28-NA" name="1.28" checked="checked">
+								<label for="1.28-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="129">1.29 Indicador de elevador ao piso ou marcação dos cabos de suspensão.</div></td>
+							<td>
+								<input type="radio" id="1.29-OK" name="1.29">
+								<label for="1.29-OK">Conforme</label>
+								<input type="radio" id="1.29-NOK" name="1.29">
+								<label for="1.29-NOK">Não Conforme</label>
+								<input type="radio" id="1.29-NA" name="1.29" checked="checked">
+								<label for="1.29-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="130">1.30 Aderência dos cabos de suspensão</div></td>
+							<td>
+								<input type="radio" id="1.30-OK" name="1.30">
+								<label for="1.30-OK">Conforme</label>
+								<input type="radio" id="1.30-NOK" name="1.30">
+								<label for="1.30-NOK">Não Conforme</label>
+								<input type="radio" id="1.30-NA" name="1.30" checked="checked">
+								<label for="1.30-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="131">1.31 Estado dos cabos de suspensão</div></td>
+							<td>
+								<input type="radio" id="1.31-OK" name="1.31">
+								<label for="1.31-OK">Conforme</label>
+								<input type="radio" id="1.31-NOK" name="1.31">
+								<label for="1.31-NOK">Não Conforme</label>
+								<input type="radio" id="1.31-NA" name="1.31" checked="checked">
+								<label for="1.31-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="132">1.32 Estado da roda de cabos</div></td>
+							<td>
+								<input type="radio" id="1.32-OK" name="1.32">
+								<label for="1.32-OK">Conforme</label>
+								<input type="radio" id="1.32-NOK" name="1.32">
+								<label for="1.32-NOK">Não Conforme</label>
+								<input type="radio" id="1.32-NA" name="1.32" checked="checked">
+								<label for="1.32-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="133">1.33 Estado das rodas de desvio</div></td>
+							<td>
+								<input type="radio" id="1.33-OK" name="1.33">
+								<label for="1.33-OK">Conforme</label>
+								<input type="radio" id="1.33-NOK" name="1.33">
+								<label for="1.33-NOK">Não Conforme</label>
+								<input type="radio" id="1.33-NA" name="1.33" checked="checked">
+								<label for="1.33-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="134">1.34 Chapas indicadoras do sentido de funcionamento da máquina </div></td>
+							<td>
+								<input type="radio" id="1.34-OK" name="1.34">
+								<label for="1.34-OK">Conforme</label>
+								<input type="radio" id="1.34-NOK" name="1.34">
+								<label for="1.34-NOK">Não Conforme</label>
+								<input type="radio" id="1.34-NA" name="1.34" checked="checked">
+								<label for="1.34-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="135">1.35 Estado de limpeza da máquina</div></td>
+							<td>
+								<input type="radio" id="1.35-OK" name="1.35">
+								<label for="1.35-OK">Conforme</label>
+								<input type="radio" id="1.35-NOK" name="1.35">
+								<label for="1.35-NOK">Não Conforme</label>
+								<input type="radio" id="1.35-NA" name="1.35" checked="checked">
+								<label for="1.35-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="136">1.36 Limpeza da casa de máquinas e aparelhagem</div></td>
+							<td>
+								<input type="radio" id="1.36-OK" name="1.36">
+								<label for="1.36-OK">Conforme</label>
+								<input type="radio" id="1.36-NOK" name="1.36">
+								<label for="1.36-NOK">Não Conforme</label>
+								<input type="radio" id="1.36-NA" name="1.36" checked="checked">
+								<label for="1.36-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+
+					</table>
+					
+					</div>
+				</section>
+
+				<section id="arcada">
+					</br>
+				    <div id="200"><h2>Arcada</h2></div>
+					<hr />
+					<div id="sp_arcada">
+					<table align="center">
+
+						<tr>
+							<td><div id="201">2.1 Sistema de pára-quedas e corte eléctrico na cabina </div> </td>
+							<td>
+
+								<input type="radio" id="2.1-OK" name="2.1">
+								<label for="2.1-OK">Conforme</label>
+								<input type="radio" id="2.1-NOK" name="2.1">
+								<label for="2.1-NOK">Não Conforme</label>
+								<input type="radio" id="2.1-NA" name="2.1" checked="checked">
+								<label for="2.1-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="202">2.2 Amarração dos cabos à cabina </div></td>
+							<td>
+								<input type="radio" id="2.2-OK" name="2.2">
+								<label for="2.2-OK">Conforme</label>
+								<input type="radio" id="2.2-NOK" name="2.2">
+								<label for="2.2-NOK">Não Conforme</label>
+								<input type="radio" id="2.2-NA" name="2.2" checked="checked">
+								<label for="2.2-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="203">2.3 Amarração dos cabos ao contrapeso e molas de suspensão</div></td>
+							<td>
+								<input type="radio" id="2.3-OK" name="2.3">
+								<label for="2.3-OK">Conforme</label>
+								<input type="radio" id="2.3-NOK" name="2.3">
+								<label for="2.3-NOK">Não Conforme</label>
+								<input type="radio" id="2.3-NA" name="2.3" checked="checked">
+								<label for="2.3-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="204">2.4 Botoneira de Revisão</div></td>
+							<td>
+								<input type="radio" id="2.4-OK" name="2.4">
+								<label for="2.4-OK">Conforme</label>
+								<input type="radio" id="2.4-NOK" name="2.4">
+								<label for="2.4-NOK">Não Conforme</label>
+								<input type="radio" id="2.4-NA" name="2.4" checked="checked">
+								<label for="2.4-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="205">2.5 Botoneira de Revisão corta o movimento da porta automática  &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</div></td>
+							<td>
+								<input type="radio" id="2.5-OK" name="2.5">
+								<label for="2.5-OK">Conforme</label>
+								<input type="radio" id="2.5-NOK" name="2.5">
+								<label for="2.5-NOK">Não Conforme</label>
+								<input type="radio" id="2.5-NA" name="2.5" checked="checked">
+								<label for="2.5-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="206">2.6 O STOP corta o movimento da porta automática</div></td>
+							<td>
+								<input type="radio" id="2.6-OK" name="2.6">
+								<label for="2.6-OK">Conforme</label>
+								<input type="radio" id="2.6-NOK" name="2.6">
+								<label for="2.6-NOK">Não Conforme</label>
+								<input type="radio" id="2.6-NA" name="2.6" checked="checked">
+								<label for="2.6-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="207">2.7 Travamento de pesos</div></td>
+							<td>
+								<input type="radio" id="2.7-OK" name="2.7">
+								<label for="2.7-OK">Conforme</label>
+								<input type="radio" id="2.7-NOK" name="2.7">
+								<label for="2.7-NOK">Não Conforme</label>
+								<input type="radio" id="2.7-NA" name="2.7" checked="checked">
+								<label for="2.7-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="208">2.8 Encravamentos de portas</div></td>
+							<td>
+								<input type="radio" id="2.8-OK" name="2.8">
+								<label for="2.8-OK">Conforme</label>
+								<input type="radio" id="2.8-NOK" name="2.8">
+								<label for="2.8-NOK">Não Conforme</label>
+								<input type="radio" id="2.8-NA" name="2.8" checked="checked">
+								<label for="2.8-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="209">2.9 Funcionamento da porta de cabina</div> </td>
+							<td>
+								<input type="radio" id="2.9-OK" name="2.9">
+								<label for="2.9-OK">Conforme</label>
+								<input type="radio" id="2.9-NOK" name="2.9">
+								<label for="2.9-NOK">Não Conforme</label>
+								<input type="radio" id="2.9-NA" name="2.9" checked="checked">
+								<label for="2.9-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="210">2.10 Estado das roçadeiras e guias da porta de cabina</div></td>
+							<td>
+								<input type="radio" id="2.10-OK" name="2.10">
+								<label for="2.10-OK">Conforme</label>
+								<input type="radio" id="2.10-NOK" name="2.10">
+								<label for="2.10-NOK">Não Conforme</label>
+								<input type="radio" id="2.10-NA" name="2.10" checked="checked">
+								<label for="2.10-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="211">2.11 Contactos de portas</div></td>
+							<td>
+								<input type="radio" id="2.11-OK" name="2.11">
+								<label for="2.11-OK">Conforme</label>
+								<input type="radio" id="2.11-NOK" name="2.11">
+								<label for="2.11-NOK">Não Conforme</label>
+								<input type="radio" id="2.11-NA" name="2.11" checked="checked">
+								<label for="2.11-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="212">2.12 Estado do cabo de manobra</div> </td>
+							<td>
+								<input type="radio" id="2.12-OK" name="2.12">
+								<label for="2.12-OK">Conforme</label>
+								<input type="radio" id="2.12-NOK" name="2.12">
+								<label for="2.12-NOK">Não Conforme</label>
+								<input type="radio" id="2.12-NA" name="2.12" checked="checked">
+								<label for="2.12-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="213">2.13 Estado das roçadeiras de cabina</div> </td>
+							<td>
+								<input type="radio" id="2.13-OK" name="2.13">
+								<label for="2.13-OK">Conforme</label>
+								<input type="radio" id="2.13-NOK" name="2.13">
+								<label for="2.13-NOK">Não Conforme</label>
+								<input type="radio" id="2.13-NA" name="2.13" checked="checked">
+								<label for="2.13-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="214">2.14 Estado das roçadeiras do contrapeso</div> </td>
+							<td>
+								<input type="radio" id="2.14-OK" name="2.14">
+								<label for="2.14-OK">Conforme</label>
+								<input type="radio" id="2.14-NOK" name="2.14">
+								<label for="2.14-NOK">Não Conforme</label>
+								<input type="radio" id="2.14-NA" name="2.14" checked="checked">
+								<label for="2.14-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="215">2.15 Estado das oleadeiras da cabine e contrapeso </div></td>
+							<td>
+								<input type="radio" id="2.15-OK" name="2.15">
+								<label for="2.15-OK">Conforme</label>
+								<input type="radio" id="2.15-NOK" name="2.15">
+								<label for="2.15-NOK">Não Conforme</label>
+								<input type="radio" id="2.15-NA" name="2.15" checked="checked">
+								<label for="2.15-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="216">2.16 Continuidade eléctrica na arcada </div> </td>
+							<td>
+								<input type="radio" id="2.16-OK" name="2.16">
+								<label for="2.16-OK">Conforme</label>
+								<input type="radio" id="2.16-NOK" name="2.16">
+								<label for="2.16-NOK">Não Conforme</label>
+								<input type="radio" id="2.16-NA" name="2.16" checked="checked">
+								<label for="2.16-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="217">2.17 Limpeza da arcada da cabina, fixações e contrapeso </div></td>
+							<td>
+								<input type="radio" id="2.17-OK" name="2.17">
+								<label for="2.17-OK">Conforme</label>
+								<input type="radio" id="2.17-NOK" name="2.17">
+								<label for="2.17-NOK">Não Conforme</label>
+								<input type="radio" id="2.17-NA" name="2.17" checked="checked">
+								<label for="2.17-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+
+					</table>
+					</div>
+				</section>
+
+				<section id="caixa">
+					</br>
+					<h2><div id="300"> Caixa e Poço</div></h2>
+					<hr />
+					<div id="sp_caixa">
+					<table align="center">
+
+						<tr>
+							<td><div id="301">3.1 Iluminação e tomadas da caixa operacionais e ligadas ao circuito de proteção</div> </td>
+							<td>
+
+								<input type="radio" id="3.1-OK" name="3.1">
+								<label for="3.1-OK">Conforme</label>
+								<input type="radio" id="3.1-NOK" name="3.1">
+								<label for="3.1-NOK">Não Conforme</label>
+								<input type="radio" id="3.1-NA" name="3.1" checked="checked">
+								<label for="3.1-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="302">3.2 Estado da instalação eléctrica (kiss)</div></td>
+							<td>
+								<input type="radio" id="3.2-OK" name="3.2">
+								<label for="3.2-OK">Conforme</label>
+								<input type="radio" id="3.2-NOK" name="3.2">
+								<label for="3.2-NOK">Não Conforme</label>
+								<input type="radio" id="3.2-NA" name="3.2" checked="checked">
+								<label for="3.2-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="303">3.3 Fixações (apertadas ou soldadas)</div></td>
+							<td>
+								<input type="radio" id="3.3-OK" name="3.3">
+								<label for="3.3-OK">Conforme</label>
+								<input type="radio" id="3.3-NOK" name="3.3">
+								<label for="3.3-NOK">Não Conforme</label>
+								<input type="radio" id="3.3-NA" name="3.3" checked="checked">
+								<label for="3.3-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="304">3.4 Interruptor do poço</div></td>
+							<td>
+								<input type="radio" id="3.4-OK" name="3.4">
+								<label for="3.4-OK">Conforme</label>
+								<input type="radio" id="3.4-NOK" name="3.4">
+								<label for="3.4-NOK">Não Conforme</label>
+								<input type="radio" id="3.4-NA" name="3.4" checked="checked">
+								<label for="3.4-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="305">3.5 Botão de alarme no poço</div></td>
+							<td>
+								<input type="radio" id="3.5-OK" name="3.5">
+								<label for="3.5-OK">Conforme</label>
+								<input type="radio" id="3.5-NOK" name="3.5">
+								<label for="3.5-NOK">Não Conforme</label>
+								<input type="radio" id="3.5-NA" name="3.5" checked="checked">
+								<label for="3.5-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="306">3.6 Interruptor tensor</div></td>
+							<td>
+								<input type="radio" id="3.6-OK" name="3.6">
+								<label for="3.6-OK">Conforme</label>
+								<input type="radio" id="3.6-NOK" name="3.6">
+								<label for="3.6-NOK">Não Conforme</label>
+								<input type="radio" id="3.6-NA" name="3.6" checked="checked">
+								<label for="3.6-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="307">3.7 Folga do contrapeso à mola</div></td>
+							<td>
+								<input type="radio" id="3.7-OK" name="3.7">
+								<label for="3.7-OK">Conforme</label>
+								<input type="radio" id="3.7-NOK" name="3.7">
+								<label for="3.7-NOK">Não Conforme</label>
+								<input type="radio" id="3.7-NA" name="3.7" checked="checked">
+								<label for="3.7-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="308">3.8 Encravamentos de portas</div></td>
+							<td>
+								<input type="radio" id="3.8-OK" name="3.8">
+								<label for="3.8-OK">Conforme</label>
+								<input type="radio" id="3.8-NOK" name="3.8">
+								<label for="3.8-NOK">Não Conforme</label>
+								<input type="radio" id="3.8-NA" name="3.8" checked="checked">
+								<label for="3.8-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="309">3.9 Interruptor da balança</div></td>
+							<td>
+								<input type="radio" id="3.9-OK" name="3.9">
+								<label for="3.9-OK">Conforme</label>
+								<input type="radio" id="3.9-NOK" name="3.9">
+								<label for="3.9-NOK">Não Conforme</label>
+								<input type="radio" id="3.9-NA" name="3.9" checked="checked">
+								<label for="3.9-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="310">3.10 Continuidade eléctrica guias</div></td>
+							<td>
+								<input type="radio" id="3.10-OK" name="3.10">
+								<label for="3.10-OK">Conforme</label>
+								<input type="radio" id="3.10-NOK" name="3.10">
+								<label for="3.10-NOK">Não Conforme</label>
+								<input type="radio" id="3.10-NA" name="3.10" checked="checked">
+								<label for="3.10-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="311">3.11 Impermeabilização do poço</div></td>
+							<td>
+								<input type="radio" id="3.11-OK" name="3.11">
+								<label for="3.11-OK">Conforme</label>
+								<input type="radio" id="3.11-NOK" name="3.11">
+								<label for="3.11-NOK">Não Conforme</label>
+								<input type="radio" id="3.11-NA" name="3.11" checked="checked">
+								<label for="3.11-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="312">3.12 Tomada do poço</div> </td>
+							<td>
+								<input type="radio" id="3.12-OK" name="3.12">
+								<label for="3.12-OK">Conforme</label>
+								<input type="radio" id="3.12-NOK" name="3.12">
+								<label for="3.12-NOK">Não Conforme</label>
+								<input type="radio" id="3.12-NA" name="3.12" checked="checked">
+								<label for="3.12-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="313">3.13 Escada de acesso ao poço </div></td>
+							<td>
+								<input type="radio" id="3.13-OK" name="3.13">
+								<label for="3.13-OK">Conforme</label>
+								<input type="radio" id="3.13-NOK" name="3.13">
+								<label for="3.13-NOK">Não Conforme</label>
+								<input type="radio" id="3.13-NA" name="3.13" checked="checked">
+								<label for="3.13-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="314">3.14 Limpeza do poço</div> </td>
+							<td>
+								<input type="radio" id="3.14-OK" name="3.14">
+								<label for="3.14-OK">Conforme</label>
+								<input type="radio" id="3.14-NOK" name="3.14">
+								<label for="3.14-NOK">Não Conforme</label>
+								<input type="radio" id="3.14-NA" name="3.14" checked="checked">
+								<label for="3.14-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+					</table>
+					</div>
+				</section>
+
+
+				<section id="cabina">
+					</br>
+					<h2><div id="400">Cabina</div> </h2>
+					<hr />
+                    <div id="sp_cabina">
+					<table align="center">
+
+						<tr>
+							<td><div id="401">4.1 Stop</div> </td>
+							<td>
+
+								<input type="radio" id="4.1-OK" name="4.1">
+								<label for="4.1-OK">Conforme</label>
+								<input type="radio" id="4.1-NOK" name="4.1">
+								<label for="4.1-NOK">Não Conforme</label>
+								<input type="radio" id="4.1-NA" name="4.1" checked="checked">
+								<label for="4.1-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="402">4.2 Célula / Cortina / Detector Volumétrico </div> </td>
+							<td>
+								<input type="radio" id="4.2-OK" name="4.2">
+								<label for="4.2-OK">Conforme</label>
+								<input type="radio" id="4.2-NOK" name="4.2">
+								<label for="4.2-NOK">Não Conforme</label>
+								<input type="radio" id="4.2-NA" name="4.2" checked="checked">
+								<label for="4.2-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="403">4.3 Contra-entalamentos</div> </td>
+							<td>
+								<input type="radio" id="4.3-OK" name="4.3">
+								<label for="4.3-OK">Conforme</label>
+								<input type="radio" id="4.3-NOK" name="4.3">
+								<label for="4.3-NOK">Não Conforme</label>
+								<input type="radio" id="4.3-NA" name="4.3" checked="checked">
+								<label for="4.3-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="404">4.4 Botão de abrir porta</div> </td>
+							<td>
+								<input type="radio" id="4.4-OK" name="4.4">
+								<label for="4.4-OK">Conforme</label>
+								<input type="radio" id="4.4-NOK" name="4.4">
+								<label for="4.4-NOK">Não Conforme</label>
+								<input type="radio" id="4.4-NA" name="4.4" checked="checked">
+								<label for="4.4-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="405">4.5 Botão de fechar porta</div> </td>
+							<td>
+								<input type="radio" id="4.5-OK" name="4.5">
+								<label for="4.5-OK">Conforme</label>
+								<input type="radio" id="4.5-NOK" name="4.5">
+								<label for="4.5-NOK">Não Conforme</label>
+								<input type="radio" id="4.5-NA" name="4.5" checked="checked">
+								<label for="4.5-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="406">4.6 Comando Bombeiros</div> </td>
+							<td>
+								<input type="radio" id="4.6-OK" name="4.6">
+								<label for="4.6-OK">Conforme</label>
+								<input type="radio" id="4.6-NOK" name="4.6">
+								<label for="4.6-NOK">Não Conforme</label>
+								<input type="radio" id="4.6-NA" name="4.6" checked="checked">
+								<label for="4.6-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="407">4.7 Patim móvel</div> </td>
+							<td>
+								<input type="radio" id="4.7-OK" name="4.7">
+								<label for="4.7-OK">Conforme</label>
+								<input type="radio" id="4.7-NOK" name="4.7">
+								<label for="4.7-NOK">Não Conforme</label>
+								<input type="radio" id="4.7-NA" name="4.7" checked="checked">
+								<label for="4.7-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="408">4.8 Alarme</div> </td>
+							<td>
+								<input type="radio" id="4.8-OK" name="4.8">
+								<label for="4.8-OK">Conforme</label>
+								<input type="radio" id="4.8-NOK" name="4.8">
+								<label for="4.8-NOK">Não Conforme</label>
+								<input type="radio" id="4.8-NA" name="4.8" checked="checked">
+								<label for="4.8-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="409">4.9 Interruptor da balança</div> </td>
+							<td>
+								<input type="radio" id="4.9-OK" name="4.9">
+								<label for="4.9-OK">Conforme</label>
+								<input type="radio" id="4.9-NOK" name="4.9">
+								<label for="4.9-NOK">Não Conforme</label>
+								<input type="radio" id="4.9-NA" name="4.9" checked="checked">
+								<label for="4.9-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="410">4.10 Tele-Emergência C 2000</div> </td>
+							<td>
+								<input type="radio" id="4.10-OK" name="4.10">
+								<label for="4.10-OK">Conforme</label>
+								<input type="radio" id="4.10-NOK" name="4.10">
+								<label for="4.10-NOK">Não Conforme</label>
+								<input type="radio" id="4.10-NA" name="4.10" checked="checked">
+								<label for="4.10-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="411">4.11 Luz de emergência</div> </td>
+							<td>
+								<input type="radio" id="4.11-OK" name="4.11">
+								<label for="4.11-OK">Conforme</label>
+								<input type="radio" id="4.11-NOK" name="4.11">
+								<label for="4.11-NOK">Não Conforme</label>
+								<input type="radio" id="4.11-NA" name="4.11" checked="checked">
+								<label for="4.11-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="412">4.12 Iluminação normal (minimo 2 lâmpadas operacionais)  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div> </td>
+							<td>
+								<input type="radio" id="4.12-OK" name="4.12">
+								<label for="4.12-OK">Conforme</label>
+								<input type="radio" id="4.12-NOK" name="4.12">
+								<label for="4.12-NOK">Não Conforme</label>
+								<input type="radio" id="4.12-NA" name="4.12" checked="checked">
+								<label for="4.12-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="413">4.13 Botão para movimento de emergência </div> </td>
+							<td>
+								<input type="radio" id="4.13-OK" name="4.13">
+								<label for="4.13-OK">Conforme</label>
+								<input type="radio" id="4.13-NOK" name="4.13">
+								<label for="4.13-NOK">Não Conforme</label>
+								<input type="radio" id="4.13-NA" name="4.13" checked="checked">
+								<label for="4.13-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="414">4.14 Balança Limitadora de Carga </div> </td>
+							<td>
+								<input type="radio" id="4.14-OK" name="4.14">
+								<label for="4.14-OK">Conforme</label>
+								<input type="radio" id="4.14-NOK" name="4.14">
+								<label for="4.14-NOK">Não Conforme</label>
+								<input type="radio" id="4.14-NA" name="4.14" checked="checked">
+								<label for="4.14-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="415">4.15 Chapas de avisos </div>  </td>
+							<td>
+								<input type="radio" id="4.15-OK" name="4.15">
+								<label for="4.15-OK">Conforme</label>
+								<input type="radio" id="4.15-NOK" name="4.15">
+								<label for="4.15-NOK">Não Conforme</label>
+								<input type="radio" id="4.15-NA" name="4.15" checked="checked">
+								<label for="4.15-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="416">4.16 Estado dos paineis, varandins, ombreiras e tecto </div>  </td>
+							<td>
+								<input type="radio" id="4.16-OK" name="4.16">
+								<label for="4.16-OK">Conforme</label>
+								<input type="radio" id="4.16-NOK" name="4.16">
+								<label for="4.16-NOK">Não Conforme</label>
+								<input type="radio" id="4.16-NA" name="4.16" checked="checked">
+								<label for="4.16-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="417">4.17 Estado do pavimento </div> </td>
+							<td>
+								<input type="radio" id="4.17-OK" name="4.17">
+								<label for="4.17-OK">Conforme</label>
+								<input type="radio" id="4.17-NOK" name="4.17">
+								<label for="4.17-NOK">Não Conforme</label>
+								<input type="radio" id="4.17-NA" name="4.17" checked="checked">
+								<label for="4.17-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+
+					</table>
+					</div>
+				</section>
+
+				<section id="patamares">
+					</br>
+					<h2><div id="500">Patamares</h2>
+					<hr />
+					<div id="sp_patamares">
+					<table align="center">
+
+						<tr>
+							<td><div id="501">5.1 Iluminação dos patamares</div> </td>
+							<td>
+
+								<input type="radio" id="5.1-OK" name="5.1">
+								<label for="5.1-OK">Conforme</label>
+								<input type="radio" id="5.1-NOK" name="5.1">
+								<label for="5.1-NOK">Não Conforme</label>
+								<input type="radio" id="5.1-NA" name="5.1" checked="checked">
+								<label for="5.1-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="502">5.2 Os encravamentos elétricos e mecânicos das portas</div> </td>
+							<td>
+								<input type="radio" id="5.2-OK" name="5.2">
+								<label for="5.2-OK">Conforme</label>
+								<input type="radio" id="5.2-NOK" name="5.2">
+								<label for="5.2-NOK">Não Conforme</label>
+								<input type="radio" id="5.2-NA" name="5.2" checked="checked">
+								<label for="5.2-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="503">5.3 As portas patamar não abrem sem a presença da cabina</div> </td>
+							<td>
+								<input type="radio" id="5.3-OK" name="5.3">
+								<label for="5.3-OK">Conforme</label>
+								<input type="radio" id="5.3-NOK" name="5.3">
+								<label for="5.3-NOK">Não Conforme</label>
+								<input type="radio" id="5.3-NA" name="5.3" checked="checked">
+								<label for="5.3-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="504">5.4 O fecho automático da porta, com a cabina fora da zona de desencravamento </div> </td>
+							<td>
+								<input type="radio" id="5.4-OK" name="5.4">
+								<label for="5.4-OK">Conforme</label>
+								<input type="radio" id="5.4-NOK" name="5.4">
+								<label for="5.4-NOK">Não Conforme</label>
+								<input type="radio" id="5.4-NA" name="5.4" checked="checked">
+								<label for="5.4-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="505">5.5 Roçadeiras em bom estado</div> </td>
+							<td>
+								<input type="radio" id="5.5-OK" name="5.5">
+								<label for="5.5-OK">Conforme</label>
+								<input type="radio" id="5.5-NOK" name="5.5">
+								<label for="5.5-NOK">Não Conforme</label>
+								<input type="radio" id="5.5-NA" name="5.5" checked="checked">
+								<label for="5.5-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="506">5.6  Sinalização da presença da cabina em caso de portas de batente </div> </td>
+							<td>
+								<input type="radio" id="5.6-OK" name="5.6">
+								<label for="5.6-OK">Conforme</label>
+								<input type="radio" id="5.6-NOK" name="5.6">
+								<label for="5.6-NOK">Não Conforme</label>
+								<input type="radio" id="5.6-NA" name="5.6" checked="checked">
+								<label for="5.6-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="507">5.7 Existem vidros partidos ou estalados</div> </td>
+							<td>
+								<input type="radio" id="5.7-OK" name="5.7">
+								<label for="5.7-OK">Conforme</label>
+								<input type="radio" id="5.7-NOK" name="5.7">
+								<label for="5.7-NOK">Não Conforme</label>
+								<input type="radio" id="5.7-NA" name="5.7" checked="checked">
+								<label for="5.7-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="508">5.8 Amortecedor e mola da porta</div> </td>
+							<td>
+								<input type="radio" id="5.8-OK" name="5.8">
+								<label for="5.8-OK">Conforme</label>
+								<input type="radio" id="5.8-NOK" name="5.8">
+								<label for="5.8-NOK">Não Conforme</label>
+								<input type="radio" id="5.8-NA" name="5.8" checked="checked">
+								<label for="5.8-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="509">5.9 Boa fixação dos aros e dos patins</div> </td>
+							<td>
+								<input type="radio" id="5.9-OK" name="5.9">
+								<label for="5.9-OK">Conforme</label>
+								<input type="radio" id="5.9-NOK" name="5.9">
+								<label for="5.9-NOK">Não Conforme</label>
+								<input type="radio" id="5.9-NA" name="5.9" checked="checked">
+								<label for="5.9-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="510">5.10 Puxador (interior, exterior)</div> </td>
+							<td>
+								<input type="radio" id="5.10-OK" name="5.10">
+								<label for="5.10-OK">Conforme</label>
+								<input type="radio" id="5.10-NOK" name="5.10">
+								<label for="5.10-NOK">Não Conforme</label>
+								<input type="radio" id="5.10-NA" name="5.10" checked="checked">
+								<label for="5.10-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="511">5.11 Dobradiças</div> </td>
+							<td>
+								<input type="radio" id="5.11-OK" name="5.11">
+								<label for="5.11-OK">Conforme</label>
+								<input type="radio" id="5.11-NOK" name="5.11">
+								<label for="5.11-NOK">Não Conforme</label>
+								<input type="radio" id="5.11-NA" name="5.11" checked="checked">
+								<label for="5.11-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="512">5.12 Chapa de empurre e identificação de piso </div> </td>
+							<td>
+								<input type="radio" id="5.12-OK" name="5.12">
+								<label for="5.12-OK">Conforme</label>
+								<input type="radio" id="5.12-NOK" name="5.12">
+								<label for="5.12-NOK">Não Conforme</label>
+								<input type="radio" id="5.12-NA" name="5.12" checked="checked">
+								<label for="5.12-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="513">5.13 Funcionamento das botoneiras de patamar</div>  </td>
+							<td>
+								<input type="radio" id="5.13-OK" name="5.13">
+								<label for="5.13-OK">Conforme</label>
+								<input type="radio" id="5.13-NOK" name="5.13">
+								<label for="5.13-NOK">Não Conforme</label>
+								<input type="radio" id="5.13-NA" name="5.13" checked="checked">
+								<label for="5.13-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+						<tr>
+							<td><div id="514">5.14 Identificação do sentido de marcha </div> </td>
+							<td>
+								<input type="radio" id="5.14-OK" name="5.14">
+								<label for="5.14-OK">Conforme</label>
+								<input type="radio" id="5.14-NOK" name="5.14">
+								<label for="5.14-NOK">Não Conforme</label>
+								<input type="radio" id="5.14-NA" name="5.14" checked="checked">
+								<label for="5.14-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td><div id="515">5.15 Funcionamento da posição de patamar </div> </td>
+							<td>
+								<input type="radio" id="5.15-OK" name="5.15">
+								<label for="5.15-OK">Conforme</label>
+								<input type="radio" id="5.15-NOK" name="5.15">
+								<label for="5.15-NOK">Não Conforme</label>
+								<input type="radio" id="5.15-NA" name="5.15" checked="checked">
+								<label for="5.15-NA">Não Aplicável</label>
+
+							</td>
+						</tr>
+
+                    </div>
+					</table>
+			    </section>
+
+				<section id="observacoes">
+					</br>
+					<h2>Observações</h2>
+					<hr />
+					<div class="field">
+						<input type="text" name="obs1" id="obs1" placeholder="">
+						<input type="text" name="obs2" id="obs2" placeholder="">
+						<input type="text" name="obs3" id="obs3" placeholder="">
+						<input type="text" name="obs4" id="obs4" placeholder="">
+						<input type="text" name="obs5" id="obs5" placeholder="">
+						<input type="text" name="obs6" id="obs6" placeholder="">
+						<input type="text" name="obs7" id="obs7" placeholder="">
+						<input type="text" name="obs8" id="obs8" placeholder="">
+
+					</div>
+					</br>
+				</section>
+
+				<section id="avaliacao">
+					</br>
+					<h2>Avaliação</h2>
+					<hr />
+					<div class="col-12">
+						<select name="avaliacao" id="avaliacao_1" required>
+							<option value=""> .....................</option>
+							<option value="1"> (1) Mau  </option>
+							<option value="2"> (2) Mau </option>
+							<option value="3"> (3) Mau </option>
+							<option value="4"> (4) Razoável </option>
+							<option value="5"> (5) Razoável  </option>
+							<option value="6"> (6) Razoável </option>
+							<option value="7"> (7) Bom </option>
+							<option value="8"> (8) Bom </option>
+							<option value="9"> (9) Bom </option>
+
+						</select>
+					</div>
+
+				</section>
+
+                </br>
+             
+               <div id="altdu">
+						
+                     <input type="submit" id= "testar" class="button primary icon solid fa-download"  name="validar" value="Emitir Relatório">
+            	     <input type="text" name="resultado" id="resultado" > 
+		     <input type="text" name="user_name" id="user_name" value="<?=$username?>" > 
+
+
+            	</div>
+
+			</form>
+  
+				</br>
+				
+				<ul class="actions">
+					
+				   <a class="button primary icon solid fa-file-pdf" onclick= "previsualizar()" >&nbsp;&nbsp;Visualizar Relatório&nbsp;&nbsp; </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <a class="button primary icon solid fa-download" onclick="funcao_pdf_v2()">&nbsp;&nbsp; Submeter Relatório&nbsp;&nbsp;</a>
+									
+			        </ul>
+			
+		</div>
+		</div>
+
+		
+
+	</div>
+
+ 
+<script>
+
+document.getElementById("altdu").style.display  = "none";
+</script>
+	
+
+
+
+</script>
+	<!-- Scripts -->
+	<script d></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/jspdf.debug.js"></script>
+	<script src="assets/js/funcao_pdf_v2.js"></script>
+	<script src="assets/js/previsualizar.js"></script>
+	<script src="assets/js/personalizado.js"></script>
+
+	
+</body>
+</html>
