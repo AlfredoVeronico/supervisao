@@ -82,15 +82,9 @@
 						 <div class="field">
 							
 								<select name="tipoequipamento" id="tipoequipameno" onchange="javascript:location.href=this.value">
-									<option value="home.php" selected> Elevadores eléctrico com casa das máquinas </option>
-									<option value="home_hp.php"> Elevadores Hidraúlicos </option>
-									<option value="home_scm.php">Elevadores eléctrico sem casa das máquinas </option>
-									<option value="home_escadas.php"> Escadas e Tapetes</option>
-									<option value="home_sobe_escadas.php"> Plataformas Sobe Escadas</option>
-									<option value="home_plataforma.php"> Plataformas Elevatórias</option>
-									<option value="home_monta_papel_electrico.php"> Monta Papel Eléctrico</option>
-									<option value="home_monta_papel_hidraulico.php"> Monta Papel Hidráulico</option>
-                            	</select>
+									<option value="index.html" selected> Elevadores eléctrico com casa das máquinas </option>
+									<option value="superv_hp.html"> Elevadores Hidraúlicos </option>
+						        </select>
 								
 							</div>
 
@@ -107,39 +101,8 @@
 							
 							    </div>							
 									
-								<div class="field half">
-							
-									<input type="text" name="delegacao" id="delegacao" value="<?=$delegacao?>" >
-								
-								</div> 
-								
-								<div class="field half">
-							
-								  <input type="text" name="rep_serv" id="rep_serv" value="<?=$rep_serv?>" >
-							
-							    </div>
-						
-						        <div class="field half">
-                                 
-                                    <input type="text" name="supervisor" id="supervisor" value="<?=$supervisor?>" >
-							
-                                </div> 
 
-						        <div class="field half">
-								    <select name="tecnico" id="tecnico" onchange="mudarSelect()">
-									<option value="<?=$tecnico1?>"> <?=$tecnico1?> </option>
-									<option value="<?=$tecnico2?>"> <?=$tecnico2?> </option>
-                                      					<option value="<?=$tecnico3?>"> <?=$tecnico3?> </option>
-									<option value="<?=$tecnico4?>"> <?=$tecnico4?> </option>
-									<option value="<?=$tecnico5?>"> <?=$tecnico5?> </option>
- 									<?php if(isset($tecnico6)){ echo "<option value='$tecnico6'>$tecnico6</option>"; }?>
-									<?php if(isset($tecnico7)){ echo "<option value='$tecnico7'>$tecnico7</option>"; }?>
-									<?php if(isset($tecnico8)){ echo "<option value='$tecnico8'>$tecnico8</option>"; }?>
 
-									
-								    </select>
-
-							    </div>
 								
 						    </div>
 						
